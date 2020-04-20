@@ -2,17 +2,12 @@ import React from "react";
 import "./styleMeme.css"
 
 class MemeGenerator extends React.Component{
-    constructor(){
-        super();
-        this.state = {
-            upperText : "",
-            lowerText : "",
-            randomImg : "http://i.imgflip.com/1bij.jpg",
-            imgUrl : []
-        }
-        this.handleChange = this.handleChange.bind(this);
-        this.handleSubmit = this.handleSubmit.bind(this);
-    }
+    state = {
+        upperText : "",
+        lowerText : "",
+        randomImg : "http://i.imgflip.com/1bij.jpg",
+        imgUrl : []
+    }    
     componentDidMount(){
        fetch("https://api.imgflip.com/get_memes")
         .then(resp => resp.json())
@@ -22,13 +17,13 @@ class MemeGenerator extends React.Component{
             })
         })
     }
-    handleChange(event){
+    handleChange = (event) => {
         const {value,name} = event.target
         this.setState({
             [name] : value
         })
     }
-    handleSubmit(event){
+    handleSubmit = (event) => {
         event.preventDefault();
         const randNum = Math.floor(Math.random()*this.state.imgUrl.length)
         const randImg = this.state.imgUrl[randNum].url
